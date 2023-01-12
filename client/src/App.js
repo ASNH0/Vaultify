@@ -3,11 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Items from './pages/Items';
 import CartPage from './pages/CartPage';
-import Register from './pages/Register';
 import Login from './pages/Login';
 import Bills from './pages/Bills';
-import Customers from './pages/Customers';
 import Cashiers from './pages/Cashiers';
+import Orders from './pages/Orders';
 
 function App() {
 
@@ -19,12 +18,12 @@ function App() {
 
         <Routes>
 
-          <Route path='/home' element={ <ProtectedRoute><Homepage /></ProtectedRoute>} />
+          <Route path='/home' element={ <ProtectedRoute><IsAdmin><Homepage /></IsAdmin></ProtectedRoute>} />
           <Route path='/Items' element={<ProtectedRoute><IsAdmin> <Items /> </IsAdmin></ProtectedRoute>} />
           <Route path='/cart' element={<ProtectedRoute> <CartPage /> </ProtectedRoute>} />
           <Route path='/bills' element={<ProtectedRoute> <Bills /> </ProtectedRoute>} />
+          <Route path='/orders' element={<ProtectedRoute> <Orders />  </ProtectedRoute>} />
           <Route path='/cashiers' element={<ProtectedRoute><IsAdmin> <Cashiers /></IsAdmin> </ProtectedRoute>} />
-          <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<Login />} />
 
@@ -64,6 +63,6 @@ export function IsAdmin({children}){
     return children
   }
   else{
-        return <Navigate to='/home' />
+        return <Navigate to='/orders' />
       }
 }

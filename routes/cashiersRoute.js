@@ -16,6 +16,7 @@ router.post("/add-cashier", async (req, res) => {
         const newcashier = new CashierModel({...req.body , isAdmin: false});
         await newcashier.save()
         res.send('cashier added successfully')
+        
     } catch (error) {
         res.status(400).json(error);
     }
@@ -41,22 +42,7 @@ router.post("/delete-cashier", async (req, res) => {
     }
 });
 
-router.post("/cashier-login", async (req, res) => {
-    try {
-      const user = await CashierModel.findOne({
-        name: req.body.name,
-        password: req.body.password,
-      
-      });
-      if (user) {
-        res.send(user);
-      } else {
-        res.status(400).json({ message: "Login failed" , user });
-      }
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  });
+
 
 
 

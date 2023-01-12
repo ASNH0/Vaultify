@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const URL = 'mongodb+srv://abd:abd@cluster0.l4lnvmf.mongodb.net/abdpos';
+const URL = 'mongodb+srv://dodo:gaga@cluster0.ndsb8s2.mongodb.net/vaultify';
 
 mongoose.connect(URL)
 

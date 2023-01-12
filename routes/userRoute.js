@@ -1,17 +1,27 @@
 const express = require("express");
 const UserModel = require("../models/userModel");
+const CashierModel = require("../models/cashiersModel");
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
   try {
     const user = await UserModel.findOne({
-      name: req.body.name,
+      userName: req.body.userName,
       password: req.body.password,
     
     });
+    const cashier = await CashierModel.findOne({
+      userName: req.body.userName,
+      password: req.body.password,
+     
+    })
     if (user) {
       res.send(user);
-    } else {
+    }
+    else if(cashier){
+      res.send(cashier);
+    }
+     else {
       res.status(400).json({ message: "Login failed" , user });
     }
   } catch (error) {

@@ -9,11 +9,24 @@ export const rootReduceer = (state = initialState, action) => {
       
       return state;
 
-    case "addToCart":
-      return {
-        ...state,
-        cartItems: [...state.cartItems, action.payload],
-      };
+      case "addToCart":
+
+      const itemIndex = state.cartItems.findIndex( (item) => item._id === action.payload._id)
+
+     console.log(itemIndex)
+     if( itemIndex >= 0 ){
+
+       return{
+         ...state,
+         cartItems: [...state.cartItems[itemIndex].quantity+=1 , action.payload],
+       };
+
+     } else{
+
+     return{
+       ...state,
+       cartItems: [...state.cartItems, action.payload],
+     };}
 
     case "updateCart":
       return {
@@ -45,6 +58,11 @@ export const rootReduceer = (state = initialState, action) => {
           ...state,
           loading: false,
         };
+      }
+
+      case "emptyCart" : {
+return initialState
+
       }
 
 

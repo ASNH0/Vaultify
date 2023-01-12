@@ -5,6 +5,7 @@ const billSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId , 
     ref: "users"
   },
+  cashierName: {type: String, required: true},
   customerName: { type: String, required: true },
   customerPhoneNumber : {type:String , required:true},
   totalAmount: { type: Number, required: true },

@@ -16,13 +16,23 @@ router.post("/charge-bill", async (req, res) => {
 
 router.get("/get-all-bills", async (req, res) => {
   try {
-    const bills = await BillModel.find({})
+    const bills = await BillModel.find()
     res.send(bills)
   } catch (error) {
     res.status(400).json(error);
   }
 });
 
+
+
+router.post("/delete-bill", async (req, res) => {
+  try {
+      await BillModel.findOneAndDelete({ _id: req.body._id })
+      res.send('Item deleted successfully')
+  } catch (error) {
+      res.status(400).json(error);
+  }
+});
 
 
 

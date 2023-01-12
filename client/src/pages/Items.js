@@ -11,29 +11,29 @@ function Items() {
   const [addEditModalVisabilty, setAddEditModalVisabilty] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const dispatch = useDispatch();
-  const newdata = []
+  const newdata = [];
   const getallItems = () => {
     dispatch({ type: "showLoading" });
     axios
       .get("/api/items/get-all-items")
       .then((response) => {
         dispatch({ type: "hideLoading" });
-        const data = response.data
-        console.log(response.data)
-        //     if( JSON.parse(localStorage.getItem("pos-user"))._id === response.data._id){
-        // setItemsData(response.data);
-        //     }
+        const data = response.data;
+        console.log(response.data);
+        if (
+          JSON.parse(localStorage.getItem("pos-user"))._id === response.data._id
+        ) {
+          setItemsData(response.data);
+        }
 
-           data.map((datas)  =>{
-          if(datas.user  ===  JSON.parse(localStorage.getItem("pos-user"))._id){
+        data.map((datas) => {
+          if (datas.user === JSON.parse(localStorage.getItem("pos-user"))._id) {
             // console.log(datas)
-            newdata.push(datas)
-            
-           
+            newdata.push(datas);
           }
-        })
+        });
 
-          setItemsData(newdata)
+        setItemsData(newdata);
       })
       .catch((error) => {
         dispatch({ type: "hideLoading" });
@@ -42,19 +42,20 @@ function Items() {
       });
   };
 
-  
-  const deleteItem  = (record) => {
+  const deleteItem = (record) => {
     dispatch({ type: "showLoading" });
     axios
-      .post("/api/items/delete-item" ,{itemId : record._id})
+      .post("/api/items/delete-item", { itemId: record._id })
       .then((response) => {
+
         dispatch({ type: "hideLoading" });
-        message.success("item deleted successfully")
+        message.success("item deleted successfully");
         getallItems();
+
       })
       .catch((error) => {
         dispatch({ type: "hideLoading" });
-        message.error("something went wrong")
+        message.error("something went wrong");
 
         console.log(error);
       });
@@ -78,10 +79,7 @@ function Items() {
       title: "Price",
       dataIndex: "price",
     },
-    {
-      title: "Category",
-      dataIndex: "category",
-    },
+  
 
     {
       title: "Actions",
@@ -96,8 +94,7 @@ function Items() {
             }}
           />
 
-          <DeleteOutlined className="mx-2" onClick={()=> deleteItem(record)} />
-
+          <DeleteOutlined className="mx-2" onClick={() => deleteItem(record)} />
         </div>
       ),
     },
@@ -111,7 +108,10 @@ function Items() {
     dispatch({ type: "showLoading" });
     if (editingItem == null) {
       axios
-        .post("/api/items/add-item",{ ...values,user:  JSON.parse(localStorage.getItem("pos-user"))._id})
+        .post("/api/items/add-item", {
+          ...values,
+          user: JSON.parse(localStorage.getItem("pos-user"))._id,
+        })
         .then((response) => {
           dispatch({ type: "hideLoading" });
           message.success("Item added successfully");
@@ -119,9 +119,8 @@ function Items() {
           getallItems();
         })
         .catch((error) => {
-
           dispatch({ type: "hideLoading" });
-          message.success("Something went wrong");
+          message.error("Something went wrong");
 
           console.log(error);
         });
@@ -130,14 +129,14 @@ function Items() {
         .post("/api/items/edit-item", { ...values, itemId: editingItem._id })
         .then((response) => {
           dispatch({ type: "hideLoading" });
-          message.error("Item Edited successfully");
+          message.success("Item Edited successfully");
           setEditingItem(null);
           setAddEditModalVisabilty(false);
           getallItems();
         })
         .catch((error) => {
           dispatch({ type: "hideLoading" });
-          message.success("Something went wrong");
+          message.error("Something went wrong");
 
           console.log(error);
         });
@@ -185,13 +184,7 @@ function Items() {
               <Input placeholder="image url" />
             </Form.Item>
 
-            <Form.Item name="category" label="Category">
-              <Select>
-                <Select.Option value="fruits"> Fruites </Select.Option>
-                <Select.Option value="vegetables"> Vegetables </Select.Option>
-                <Select.Option value="meat"> Meat </Select.Option>
-              </Select>
-            </Form.Item>
+       
 
             <div className="d-flex justify-content-end">
               <Button htmlType="submit" type="primary">

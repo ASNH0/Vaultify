@@ -6,7 +6,7 @@ const cashiersSchema = mongoose.Schema({
         ref: "users"
       },
     name: { type: String, required: true },
-    usreName: { type: String, required: true },
+    userName: { type: String, required: true },
     password: { type: String, required: true },
     isAdmin: {type : Boolean , required:false},
 

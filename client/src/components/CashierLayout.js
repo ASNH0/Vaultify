@@ -18,7 +18,7 @@ import img from "../vaultify.png";
 
 const { Header, Sider, Content } = Layout;
 
-const DefaultLayout = (props) => {
+const CashierLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const { cartItems, loading } = useSelector((state) => state.rootReduceer);
@@ -44,11 +44,6 @@ const DefaultLayout = (props) => {
           defaultSelectedKeys={window.location.pathname}
           items={[
             {
-              key: "/home",
-              icon: <HomeOutlined />,
-              label: <Link to="/home">Home</Link>,
-            },
-            {
               key: "/orders",
               icon: <FormOutlined />,
               label: <Link to="/orders">Order</Link>,
@@ -61,21 +56,9 @@ const DefaultLayout = (props) => {
             },
 
             {
-              key: "/Items",
-              icon: <UnorderedListOutlined />,
-              label: <Link to="/Items">Items</Link>,
-            },
-
-            {
               key: "/bills",
               icon: <CopyOutlined />,
               label: <Link to="/bills">Bills</Link>,
-            },
-
-            {
-              key: "/cashiers",
-              icon: <UserOutlined />,
-              label: <Link to="/cashiers">Cashiers</Link>,
             },
 
             {
@@ -122,8 +105,6 @@ const DefaultLayout = (props) => {
             src={img}
             preview={false}
          
-          
-
           />
           <div
             className="cart-count d-flex align-items-center"
@@ -149,4 +130,4 @@ const DefaultLayout = (props) => {
     </Layout>
   );
 };
-export default DefaultLayout;
+export default CashierLayout;

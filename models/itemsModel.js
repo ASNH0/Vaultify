@@ -10,8 +10,7 @@ const itemsSchema = mongoose.Schema({
     image: { type: String, required: true },
     price: { type: Number, required: true },
     itemId: {type: String , $inc: {seq:1}},
-    category: { type: String, required: true }
-
+    
 },{timestamps: true});
 
 const itemsModel = mongoose.model("items", itemsSchema);

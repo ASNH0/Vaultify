@@ -5,6 +5,7 @@ const userModel = require("../models/userModel");
 const router = express.Router();
 
 router.get("/get-all-items", async (req, res) => {
+    
     //tried to access localstorage from backend    
     //   const users =  localS();
         //     console.log(users);
