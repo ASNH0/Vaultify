@@ -1,8 +1,10 @@
+
+
 const users = [
     {
         name :"mac",
-        userName:"mac",
-        password :"mac",
+        userName: "mac",
+        password : "mac",
         isAdmin:true ,
         userId:"1"  
     },
@@ -16,4 +18,4 @@ const users = [
 
 ]
 
-module.exports = users
+module.exports =  users

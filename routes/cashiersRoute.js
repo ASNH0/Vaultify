@@ -24,7 +24,7 @@ router.post("/add-cashier", async (req, res) => {
 
 router.post("/edit-cashier", async (req, res) => {
     try {
-        await CashierModel.findOneAndUpdate({ _id: req.body.cashierId }, req.body)
+        await CashierModel.findOneAndUpdate( req.body)
         res.send('cashier updated successfully')
     } catch (error) {
         res.status(400).json(error);

@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const users = require("./data/users");
 const usersModel = require("./models/userModel");
-const stores = require("./data/stores");
+
 const dbConnect = require("./dbConnect");
 const itemsModel = require("./models/itemsModel");
+const billModel = require("./models/billModel");
+const cashierModel = require("./models/cashiersModel");
 const items = require("./data/items");
 const importALL = async ()=>{
 
@@ -13,10 +15,13 @@ const importALL = async ()=>{
             
             await usersModel.deleteMany();
             await itemsModel.deleteMany();
+            await billModel.deleteMany();
+            await cashierModel.deleteMany();
 
             const createdUsers = await usersModel.insertMany(users);
             
             const adminUser = createdUsers[0]._id
+
 
             const sampleItems = items.map(item =>{
                     return {...item , user: adminUser}

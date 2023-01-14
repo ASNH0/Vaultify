@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
-const URL = 'mongodb+srv://dodo:gaga@cluster0.ndsb8s2.mongodb.net/vaultify';
+require("dotenv").config()
+const URL = process.env.MONGO_URL;
 
 mongoose.connect(URL)
 
