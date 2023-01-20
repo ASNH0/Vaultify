@@ -14,15 +14,16 @@ const cashiersSchema = mongoose.Schema({
 
 
 
-cashiersSchema.pre("save", function (next) {
+cashiersSchema.pre("save",  function (next) {
   const user = this
 
+ 
   if (this.isModified("password") || this.isNew) {
-    bcrypt.genSalt(10, function (saltError, salt) {
+      bcrypt.genSalt(10, function (saltError, salt) {
       if (saltError) {
         return next(saltError)
       } else {
-        bcrypt.hash(user.password, salt, function(hashError, hash) {
+         bcrypt.hash(user.password, salt, function(hashError, hash) {
           if (hashError) {
             return next(hashError)
           }
@@ -35,7 +36,26 @@ cashiersSchema.pre("save", function (next) {
   } else {
     return next()
   }
+
+
 })
+
+cashiersSchema.pre("findOneAndUpdate", async function(next) {
+
+
+   try {
+    if (this._update.password) {
+      const hashed = await bcrypt.hash(this._update.password, 10);
+      this._update.password = hashed;
+    }
+    next();
+  } catch (err) {
+    return next(err);
+  }
+
+})
+
+
 
 const cashiersModel = mongoose.model("cashiers", cashiersSchema);
 

@@ -68,10 +68,10 @@ function Cashiers() {
       dataIndex: "userName",
     },
 
-    {
-      title: "Password",
-      dataIndex: "password",
-    },
+    // {
+    //   title: "Password",
+    //   dataIndex: "password",
+    // },
     {
       title: "added in ",
       dataIndex: "name",
@@ -134,9 +134,9 @@ function Cashiers() {
         });
     } else {
       axios
-        .post("/api/cashiers/edit-cashier", {
+        .put("/api/cashiers/edit-cashier", {
           ...values,
-          cashierId: editingCashier._id,
+           cashierId: editingCashier._id,
         })
         .then((response) => {
           dispatch({ type: "hideLoading" });
@@ -184,20 +184,32 @@ function Cashiers() {
             footer={false}
           >
             <Form
-              initialValues={editingCashier}
+              // initialValues={editingCashier}
               layout="vertical"
               onFinish={onFinish}
             >
-              <Form.Item name="name" label="Name">
-                <Input placeholder="Name" />
+              <Form.Item name="name" label="Name" >
+                <Input defaultValue={`${
+                editingCashier !== null
+                  ? editingCashier.name 
+                  : ""
+                 }`} placeholder="Name" />
               </Form.Item>
 
               <Form.Item name="userName" label="username">
-                <Input placeholder="usrename" />
+                <Input placeholder="usrename" defaultValue={`${
+                editingCashier !== null
+                  ? editingCashier.userName 
+                  : ""
+                 }`} />
               </Form.Item>
 
-              <Form.Item name="password" label="password">
-                <Input placeholder="password" />
+              <Form.Item   name="password"  label="password">
+                <Input defaultValue={`${
+                editingCashier !== null
+                  ? "" 
+                  : ""
+                 }`} placeholder="password" />
               </Form.Item>
 
               <div className="d-flex justify-content-end">
